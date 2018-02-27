@@ -1,0 +1,36 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: splunk
+  labels:
+    apps: splunk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: splunk
+  template:
+    metadata:
+      labels:
+        app: splunk
+    spec:
+      containers:
+        - name: splunk
+          image: splunk/splunk:latest
+          ports:
+            - containerPort: 8000
+            - containerPort: 8088
+          env:
+          - name: SPLUNK_START_ARGS
+            value: --accept-license
+          - name: SPLUNK_USER
+            value: root
+      imagePullSecrets:
+        - name: docker-store-registry-key
+
+#kubectl create secret docker-registry docker-store-registry-key --docker-server="https://index.docker.io/v1/" --docker-username=DOCKER_USER --docker-password=DOCKER_PASSWORD --docker-email=DOCKER_EMAIL
+#kubectl create -f splunk-sh.yml
+#Create the services
+#kubectl expose deployment splunk --type="LoadBalancer" --port=80 --target-port=8000
+#kubectl get service splunk-deployment
+#admin and password changeme
