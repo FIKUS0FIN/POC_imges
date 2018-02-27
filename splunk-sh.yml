@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: splunk
-          image: splunk/splunk:latest
+          image: gcr.io/gcp-lab-epam/github-fikus0fin-poc_imges:splunk-sh_0.1
           ports:
             - containerPort: 8000
             - containerPort: 8088
@@ -25,8 +25,6 @@ spec:
             value: --accept-license
           - name: SPLUNK_USER
             value: root
-      imagePullSecrets:
-        - name: docker-store-registry-key
 
 #kubectl create secret docker-registry docker-store-registry-key --docker-server="https://index.docker.io/v1/" --docker-username=DOCKER_USER --docker-password=DOCKER_PASSWORD --docker-email=DOCKER_EMAIL
 #kubectl create -f splunk-sh.yml
